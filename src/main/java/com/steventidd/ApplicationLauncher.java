@@ -1,10 +1,16 @@
 package com.steventidd;
 
-import com.steventidd.web.BankServlet;
+import com.steventidd.context.ApplicationConfig;
+
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Wrapper;
 import org.apache.catalina.startup.Tomcat;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
+
+import javax.servlet.ServletContext;
 
 
 public class ApplicationLauncher {
@@ -17,12 +23,25 @@ public class ApplicationLauncher {
         tomcat.setPort(8085);
         tomcat.getConnector();
 
-        Context ctx = tomcat.addContext("", null);
-        Wrapper servlet = Tomcat.addServlet(ctx,"myBankServlet", new BankServlet());
+        Context tomcatCtx = tomcat.addContext("", null);
+
+
+        WebApplicationContext appCtx = createApplicationContext(tomcatCtx.getServletContext());
+        DispatcherServlet dispatcherServlet = new DispatcherServlet(appCtx);
+        Wrapper servlet = Tomcat.addServlet(tomcatCtx,"myBankServlet", dispatcherServlet);
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/*");
 
         tomcat.start();
 
+    }
+
+    private static WebApplicationContext createApplicationContext(ServletContext servletContext) {
+        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+        ctx.register(ApplicationConfig.class);
+        ctx.setServletContext(servletContext);
+        ctx.refresh();
+        ctx.registerShutdownHook();
+        return ctx;
     }
 }
