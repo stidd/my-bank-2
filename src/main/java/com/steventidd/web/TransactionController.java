@@ -2,7 +2,8 @@ package com.steventidd.web;
 
 import com.steventidd.model.Transaction;
 import com.steventidd.service.TransactionService;
-import dto.TransactionDTO;
+import com.steventidd.dto.TransactionDTO;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ public class TransactionController {
     public TransactionController(TransactionService transactionService){
         this.transactionService = transactionService;
     }
+
 
     @GetMapping("/transactions")
     public List<Transaction> transactions(){

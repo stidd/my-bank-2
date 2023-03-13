@@ -1,4 +1,4 @@
-package dto;
+package com.steventidd.dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

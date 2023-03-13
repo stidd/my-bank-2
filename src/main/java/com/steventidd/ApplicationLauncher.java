@@ -28,7 +28,7 @@ public class ApplicationLauncher {
 
         WebApplicationContext appCtx = createApplicationContext(tomcatCtx.getServletContext());
         DispatcherServlet dispatcherServlet = new DispatcherServlet(appCtx);
-        Wrapper servlet = Tomcat.addServlet(tomcatCtx,"myBankServlet", dispatcherServlet);
+        Wrapper servlet = Tomcat.addServlet(tomcatCtx,"dispatcherServlet", dispatcherServlet);
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/*");
 
