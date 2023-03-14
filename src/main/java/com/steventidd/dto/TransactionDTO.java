@@ -14,6 +14,10 @@ public class TransactionDTO {
     @NotBlank
     private String reference;
 
+    private String receivingUser;
+
+
+
     public Integer getAmount() {
         return amount;
     }
@@ -28,5 +32,13 @@ public class TransactionDTO {
 
     public void setReference(String reference) {
         this.reference = reference;
+    }
+
+    public String getReceivingUser() {
+        return receivingUser;
+    }
+
+    public void setReceivingUser(String receivingUser) {
+        this.receivingUser = receivingUser;
     }
 }
