@@ -26,7 +26,7 @@ public class TransactionService {
         List<Transaction> accountTransactions = new CopyOnWriteArrayList<>();
 
         for(Transaction transaction : transactions){
-            if (transaction.getId().equals(userId)) {
+            if (transaction.getReceivingUser().equals(userId)) {
                 accountTransactions.add(transaction);
             }
         }
@@ -36,11 +36,11 @@ public class TransactionService {
     }
 
 
-    public Transaction createTransaction(Integer amount, String reference){
+    public Transaction createTransaction(Integer amount, String reference, String receivingUser){
 
         ZonedDateTime timestamp = ZonedDateTime.now();
 
-        Transaction transaction = new Transaction(amount, timestamp, reference);
+        Transaction transaction = new Transaction(amount, timestamp, reference, receivingUser);
 
         transactions.add(transaction);
 

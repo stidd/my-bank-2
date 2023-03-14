@@ -11,6 +11,8 @@ public class Transaction {
 
     private String id;
 
+    private String receivingUser;
+
     private Integer amount;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mmZ")
@@ -19,11 +21,14 @@ public class Transaction {
     private String reference;
 
 
-    public Transaction(Integer amount, ZonedDateTime timestamp, String reference) {
+
+
+    public Transaction(Integer amount, ZonedDateTime timestamp, String reference, String receivingUser) {
         this.id = UUID.randomUUID().toString();
         this.amount = amount;
         this.timestamp = timestamp;
         this.reference = reference;
+        this.receivingUser = receivingUser;
     }
 
     public String getId() {
@@ -56,5 +61,13 @@ public class Transaction {
 
     public void setReference(String reference) {
         this.reference = reference;
+    }
+
+    public String getReceivingUser() {
+        return receivingUser;
+    }
+
+    public void setReceivingUser(String receivingUser) {
+        this.receivingUser = receivingUser;
     }
 }
