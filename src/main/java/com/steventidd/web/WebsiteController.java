@@ -1,8 +1,8 @@
 package com.steventidd.web;
 
-import com.steventidd.model.AccountForm;
-import com.steventidd.model.Transaction;
+import com.steventidd.web.forms.AccountForm;
 import com.steventidd.service.TransactionService;
+import com.steventidd.web.forms.LoginForm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class WebsiteController {
@@ -28,6 +26,20 @@ public class WebsiteController {
     public String index(Model model) {
         model.addAttribute("slogan", bankSlogan);
         return "index.html";
+    }
+
+    @GetMapping("/account")
+    public String login(Model model){
+
+        model.addAttribute("loginForm", new LoginForm());
+
+        return "login.html";
+    }
+
+    @PostMapping("/account")
+    public String login(@ModelAttribute AccountForm accountForm, Model model) {
+
+        return "redirect:/account/" + accountForm.getReceivingUser();
     }
 
 
@@ -56,6 +68,8 @@ public class WebsiteController {
         return "redirect:/account/" + userId;
 
     }
+
+
 
     private void buildAccountPageModel(Model model, String userId) {
         model.addAttribute("userId", userId);

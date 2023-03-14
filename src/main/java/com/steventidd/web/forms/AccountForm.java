@@ -1,4 +1,4 @@
-package com.steventidd.model;
+package com.steventidd.web.forms;
 
 import javax.validation.constraints.NotBlank;
 

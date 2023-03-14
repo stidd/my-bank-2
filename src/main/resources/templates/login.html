@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to the Login Page</title>
+</head>
+<body>
+  <h1>Welcome to the Login Page</h1>
+
+  <form th:action="@{/account/{id}(id=${userId})}" th:object="${loginForm}" method="post">
+
+    <p>Receiving UserId: <input type="text" th:field="*{receivingUser}" /></p>
+
+
+    <p><input type="submit" value="Submit"/></p>
+
+  </form>
+
+
+
+</body>
+</html>
